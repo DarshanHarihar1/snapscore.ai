@@ -1,0 +1,204 @@
+preprocess:
+  max_size: [640, 640]
+
+  pad_color: [0, 0, 0]
+
+  enhancement:
+    type: clahe
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+
+    conditional: true
+    thresholds:
+      brightness_min: 70
+      brightness_max: 180
+
+      contrast_std_min: 40
+
+detect:
+  use_hf: true
+  hf_model: "valentinafeve/yolos-fashionpedia"
+  device: -1
+
+  allowed_classes:
+    - 'shirt, blouse'
+    - 'top, t-shirt, sweatshirt' 
+    - 'shirt, blouse'
+    - 'top, t-shirt, sweatshirt'
+    - 'sweater'
+    - 'cardigan'
+    - 'jacket' 
+    - 'vest'
+    - 'pants' 
+    - 'shorts' 
+    - 'skirt' 
+    - 'coat' 
+    - 'dress'
+    - 'jumpsuit' 
+    - 'cape'
+    - 'glasses' 
+    - 'hat'
+    - 'headband, head covering, hair accessory' 
+    - 'tie'
+    - 'glove' 
+    - 'watch' 
+    - 'belt'
+    - 'leg warmer'
+    - 'tights, stockings'
+    - 'sock' 
+    - 'shoe'
+    - 'bag, wallet' 
+    - 'scarf'
+    - 'umbrella'
+
+input:
+  raw_image: "data/raw/test_2.jpeg"
+
+
+
+classify:
+  categories:
+    - "polo t shirt"
+    - "casual t shirt"
+    - "oversized t shirt"
+    - "formal shirt"
+    - "casual shirt"
+    - "blouse"
+
+    - "crew neck t shirt"
+    - "v neck t shirt"
+    - "long sleeve t shirt"
+    - "sweatshirt"
+    - "hoodie"
+    - "tank top"
+    - "crop top"
+
+    - "crew neck sweater"
+    - "v neck sweater"
+    - "turtleneck sweater"
+    - "cable knit sweater"
+    - "button-up cardigan"
+    - "open-front cardigan"
+    - "longline cardigan"
+
+    - "denim jacket"
+    - "leather jacket"
+    - "bomber jacket"
+    - "blazer"
+    - "puffer jacket"
+    - "trench coat"
+    - "pea coat"
+    - "parka"
+    - "raincoat"
+    - "cape"
+    - "vest"
+    - "waistcoat vest"
+    - "down vest"
+    - "sweater vest"
+
+    - "jeans"
+    - "chinos"
+    - "cargo pants"
+    - "joggers"
+    - "leggings"
+    - "denim shorts"
+    - "cargo shorts"
+    - "biker shorts"
+    - "mini skirt"
+    - "midi skirt"
+    - "maxi skirt"
+    - "pleated skirt"
+
+    - "casual dress"
+    - "cocktail dress"
+    - "evening gown"
+    - "maxi dress"
+    - "mini dress"
+    - "sundress"
+    - "wrap dress"
+    - "shirt dress"
+    - "casual jumpsuit"
+    - "denim jumpsuit"
+    - "tailored jumpsuit"
+
+    - "baseball cap"
+    - "beanie"
+    - "fedora"
+    - "panama hat"
+    - "sun hat"
+    - "bucket hat"
+    - "headband"
+    - "bandana"
+    - "hair accessory"
+    - "sunglasses"
+    - "reading glasses"
+    - "aviator sunglasses"
+    - "round glasses"
+    - "necktie"
+    - "bow tie"
+    - "leather gloves"
+    - "knit gloves"
+    - "fingerless gloves"
+    - "wristwatch"
+    - "smartwatch"
+    - "leather belt"
+    - "fabric belt"
+    - "leg warmers"
+    - "tights"
+    - "stockings"
+    - "ankle socks"
+    - "crew socks"
+    - "no-show socks"
+    - "sneakers"
+    - "boots"
+    - "sandals"
+    - "heels"
+    - "loafers"
+    - "handbag"
+    - "backpack"
+    - "clutch"
+    - "wallet"
+    - "crossbody bag"
+    - "tote bag"
+    - "wool scarf"
+    - "silk scarf"
+    - "knit scarf"
+    - "compact umbrella"
+    - "golf umbrella"
+
+  top_k: 1              
+  color:
+    clusters: 3
+  pattern:
+    edge_thresh: 0.02
+  ocr:
+    languages:
+      - "en"
+
+querygen:
+  templates:
+    # - "{{category}} {{pattern}} {{dominant_color}} {{logo_text}}"
+    - "{{gender}} {{category}} {{dominant_color}}"
+
+  use_clip: false
+  clip_model: "openai/clip-vit-base-patch32"
+
+search:
+  headless: false
+  timeout: 10
+  output_path: "search_results.json"
+
+vision:
+  auth_json: "/Users/darshan/Documents/snapshop.ai/auth.json"
+
+search_aggregator:
+  top_k: 5
+  weight_text:  1.0
+  weight_image: 0.5
+
+
+curation:
+  top_k: 5          
+  drop_none_url: true  
+
+
