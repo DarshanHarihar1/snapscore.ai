@@ -164,7 +164,6 @@ classify:
     - "silk scarf"
     - "knit scarf"
     - "compact umbrella"
-    - "golf umbrella"
 
   top_k: 1              
   color:
