@@ -4,7 +4,7 @@ Snapshop.AI is a modular, multi-agent pipeline for fashion product discovery. Gi
 
 1. Preprocesses the image to normalize size, lighting and contrast.
 2. Detects individual fashion items (bounding boxes).
-3. Classifies each crop (e.g., "long sleeve shirt," "cargo pants").
+3. Classifies each crop (e.g., "long sleeve shirt," "cargo pants", "polo shirt").
 4. Generates a set of text queries per item.
 5. Searches Google Images Lens with each crop + query to find visual matches.
 6. Curates the raw matches—deduplicating, filtering out missing URLs, and keeping top-K per item.
